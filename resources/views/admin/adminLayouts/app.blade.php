@@ -46,7 +46,7 @@
     @include('admin.inclodeAd.aside')
     <div class="page-wrapper">
 
-        @yield('content')
+        @yield('contentAd')
 
     </div>
 
@@ -75,6 +75,9 @@
 <script src="{{asset('admin/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js')}}"></script>
 <script src="{{asset('admin/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js')}}"></script>
 <script src="{{asset('admin/dist/js/pages/dashboards/dashboard1.min.js')}}"></script>
+<script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg="nest"></script>
+
+
 </body>
 
 </html>

@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function isAdmin() {
-        if ($this->role == 'admin' || $this->role == 'superAdmin') {
+        if ($this->status == 'success') {
             return true;
         }
     }
