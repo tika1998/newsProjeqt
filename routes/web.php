@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/adminPan', function () {
     return view('admin.adminLayouts.app');
-});
+})->middleware('is_admin');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

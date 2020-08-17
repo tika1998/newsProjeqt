@@ -42,8 +42,8 @@ class User extends Authenticatable
     ];
 
     public function isAdmin() {
-        if ($this->role !== 'admin' || $this->role !== 'superAdmin') {
-            return false;
+        if ($this->role == 'admin' || $this->role == 'superAdmin') {
+            return true;
         }
     }
 }
