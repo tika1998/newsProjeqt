@@ -23,6 +23,21 @@ Route::get('/adminPan', function () {
 
 Auth::routes();
 
-Route::get('user', 'UserController@index');
+Route::get('/change/{id}', 'UserController@changeStatus');
+//Route::get('/mail', 'UserController@send');
+Route::get('/hello', 'UserController@hello');
+
+//Route::get('/unsubscribe/{user}', function (Request $request) {
+//    if (!$request->hasValidSignature()) {
+//        abort(401);
+//    }
+//
+//})->name('unsubscribe');
+
+Route::resource('user', 'UserController');
+Route::resource('category', 'CategoryController');
+Route::resource('news', 'NewsConroller');
+
+Route::get('/newsCateg/{id}', 'NewsController@categoryNews');
 
 Route::get('/home', 'HomeController@index')->name('home');

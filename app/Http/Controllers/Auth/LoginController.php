@@ -30,10 +30,10 @@ class LoginController extends Controller
 
     protected function redirectToo()
     {
-        if (auth()->user()->role == 'admin') {
+        if (auth()->user()->role == 'admin' &&  auth()->user()->status == 'success') {
             return '/adminPan';
         }
-        return '/home';
+        return '/';
     }
 
     /**

@@ -23,6 +23,7 @@ class CheckIsAdmin
         if(!$admin->isAdmin()) {
             return abort(404);
         }
+
         return $next($request);
     }
 }

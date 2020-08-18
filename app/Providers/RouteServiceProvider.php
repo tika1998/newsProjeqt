@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Category;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,7 +33,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
+        if (Schema::hasTable('categories')) {
+            View::share('categories', Category::select(['id','name'])->orderBy('id', 'asc')->get());
+        }
 
         parent::boot();
     }

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminCreate;
+use App\Mail\AdminMail;
+use App\Mail\AdminSuccess;
 use App\User;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -15,9 +21,16 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.showAllUsers', compact('users'));
+        return view('admin.users.showAllUsers', compact('users'));
     }
 
+    public function changeStatus($id) {
+        $user = User::find($id);
+        $email = $user->email;
+        $user->update(['status' => 'success']);
+        Mail::to($email)->send(new AdminSuccess());
+        return back();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -34,9 +47,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminCreate $request)
     {
-        //
+        $email = $request->input('email');
+//       $r =  URL::signedRoute('unsubscribe', ['user' => 1]);
+        $pass = $request->input('password');
+        $hashPass = Hash::make($pass);
+        $userAdm = $request->all();
+        $userAdm['password'] = $hashPass;
+        User::create($userAdm);
+
+
+        Mail::to($email)->send(new AdminMail());
+        // view('message', compact('email'));
+        return back();
     }
 
     /**
@@ -50,6 +74,7 @@ class UserController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -58,7 +83,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            return view('admin.users.updateUser', compact('user'));
+        }   else {
+            return back();
+        }
     }
 
     /**
@@ -70,7 +101,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd('sas');
+        $user = User::find($id);
+        $user->update($request->all());
     }
 
     /**
@@ -81,6 +114,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/user');
     }
 }
