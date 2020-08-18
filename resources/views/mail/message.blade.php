@@ -10,7 +10,7 @@
 <body>
     <h3>Admin notification</h3>
     <p>Are you agree???</p>
-     <p>Yor pass {{dd($email)}}</p>}
+{{--     <p>Yor pass {{dd($email)}}</p>}--}}
     <a href="{{url('/')}}">A agree</a>
 </body>
 </html>

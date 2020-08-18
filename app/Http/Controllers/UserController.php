@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contract\UserInterface;
 use App\Http\Requests\AdminCreate;
 use App\Mail\AdminMail;
 use App\Mail\AdminSuccess;
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+    private $userIterface;
+
+    public function __construct(UserInterface $userIterface) {
+        $this->userIterface = $userIterface;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,25 +27,23 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = $this->userIterface->index();
         return view('admin.users.showAllUsers', compact('users'));
     }
 
     public function changeStatus($id) {
-        $user = User::find($id);
-        $email = $user->email;
-        $user->update(['status' => 'success']);
-        Mail::to($email)->send(new AdminSuccess());
-        return back();
+        return $this->userIterface->changeStatus($id);
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('admin.users.create');
+        return $this->userIterface->create();
     }
 
     /**
@@ -49,18 +54,7 @@ class UserController extends Controller
      */
     public function store(AdminCreate $request)
     {
-        $email = $request->input('email');
-//       $r =  URL::signedRoute('unsubscribe', ['user' => 1]);
-        $pass = $request->input('password');
-        $hashPass = Hash::make($pass);
-        $userAdm = $request->all();
-        $userAdm['password'] = $hashPass;
-        User::create($userAdm);
-
-
-        Mail::to($email)->send(new AdminMail());
-        // view('message', compact('email'));
-        return back();
+      return $this->userIterface->store($request);
     }
 
     /**
@@ -74,7 +68,6 @@ class UserController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,13 +76,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-
-        if ($user) {
-            return view('admin.users.updateUser', compact('user'));
-        }   else {
-            return back();
-        }
+        return $this->userIterface->edit($id);
     }
 
     /**
@@ -101,9 +88,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('sas');
-        $user = User::find($id);
-        $user->update($request->all());
+        return $this->userIterface->update($request, $id);
     }
 
     /**
@@ -114,8 +99,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/user');
+      return $this->userIterface->destroy($id);
     }
 }

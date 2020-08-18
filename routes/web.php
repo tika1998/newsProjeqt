@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/adminPan', function () {
     return view('admin.adminLayouts.app');
@@ -36,7 +36,7 @@ Route::get('/hello', 'UserController@hello');
 
 Route::resource('user', 'UserController');
 Route::resource('category', 'CategoryController');
-Route::resource('news', 'NewsConroller');
+Route::resource('news', 'NewsController');
 
 Route::get('/newsCateg/{id}', 'NewsController@categoryNews');
 
