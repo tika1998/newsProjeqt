@@ -67,11 +67,13 @@ class RegisterController extends Controller
 
 //        $img = Helper::image_upload($data);
 
+        //uxarkel bolor super adminnerin nor registracia exac useri masin
+       // Mail::to($email)->send(new AdminMail());
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
     }
 }

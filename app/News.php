@@ -7,13 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $fillable = [
-        'category_id', 'title', 'short_description', 'long_description', 'image',
+        'category_id', 'title', 'short_description', 'long_description',
     ];
 
 
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    public function news()
+    {
+        return $this->hasMany('App\File')->orderBy('asc');
     }
 
     public function users() {

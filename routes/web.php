@@ -15,17 +15,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+
+Route::group(['middleware' => 'is_admin'], function () {
+    Route::get('/adminPan', function () {
+        return view('admin.adminLayouts.app');
+    });
+    Route::get('/change/{id}', 'UserController@changeStatus');
+    Route::get('/block/{id}', 'UserController@blockUSer');
+    Route::resource('user', 'UserController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('news', 'NewsController');
+    Route::get('/newsCateg/{id}', 'NewsController@categoryNews');
 });
 
-Route::get('/adminPan', function () {
-    return view('admin.adminLayouts.app');
-})->middleware('is_admin');
+Route::get('/user/verify/{token}', 'UserController@verifyUser');
+
 
 Auth::routes();
 
-Route::get('/change/{id}', 'UserController@changeStatus');
+
 //Route::get('/mail', 'UserController@send');
-Route::get('/hello', 'UserController@hello');
 
 //Route::get('/unsubscribe/{user}', function (Request $request) {
 //    if (!$request->hasValidSignature()) {
@@ -34,10 +44,7 @@ Route::get('/hello', 'UserController@hello');
 //
 //})->name('unsubscribe');
 
-Route::resource('user', 'UserController');
-Route::resource('category', 'CategoryController');
-Route::resource('news', 'NewsConroller');
+Route::resource('news', 'NewsController');
 
-Route::get('/newsCateg/{id}', 'NewsController@categoryNews');
 
 Route::get('/home', 'HomeController@index')->name('home');

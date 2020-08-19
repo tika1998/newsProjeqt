@@ -18,10 +18,10 @@ class CheckIsAdmin
     {
         $admin = Auth::User();
         if($admin==null){
-            return abort(404);
+            return redirect()->route('login');
         }
         if(!$admin->isAdmin()) {
-            return abort(404);
+            return redirect()->route('welcome')->with('message', 'mnaceq kapi mej');
         }
 
         return $next($request);

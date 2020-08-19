@@ -19,9 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('role')->default('admin');
             $table->string('status')->default('panding');
             $table->string('email')->unique();
-            $table->string('image')->default('user.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

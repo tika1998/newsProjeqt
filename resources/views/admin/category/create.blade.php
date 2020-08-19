@@ -9,9 +9,6 @@
                 </p>
         </div>
     @endif
-    @if(Session::has('message'))
-        <p class="alert alert-info"><i class="fas fa-smile"></i>{{ Session::get('message') }}</p>
-    @endif
     <form action="{{route('category.store')}}" class="col-8 mt-5" method="post">
         @csrf
         <div class="input-group input-group-sm mb-3">

@@ -47,13 +47,10 @@
     <div class="page-wrapper">
 
         @yield('contentAd')
-
+        @if(Session::has('message'))
+            <p class="alert alert-info">{{ Session::get('message') }}</p>
+        @endif
     </div>
-
-    <footer class="footer text-center text-muted">
-        All Rights Reserved by Adminmart. Designed and Developed by <a
-            href="https://wrappixel.com">WrapPixel</a>.
-    </footer>
 </div>
 
 <script src="{{asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>

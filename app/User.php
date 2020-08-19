@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\News', 'news_user');
     }
 
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -42,7 +46,7 @@ class User extends Authenticatable
     ];
 
     public function isAdmin() {
-        if ($this->status == 'success') {
+        if ($this->status == 'success' || $this->name == 'Admin') {
             return true;
         }
     }
