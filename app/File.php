@@ -10,7 +10,7 @@ class File extends Model
        'news_id', 'name'
     ];
 
-    public function user()
+    public function news()
     {
         return $this->belongsTo('App\news', 'news_id');
     }

@@ -64,12 +64,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-//        $img = Helper::image_upload($data);
-
-        //uxarkel bolor super adminnerin nor registracia exac useri masin
-       // Mail::to($email)->send(new AdminMail());
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

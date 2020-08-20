@@ -26,21 +26,20 @@
 <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
 
 
-<div class="container">
-    @include('incloude.header')
-    @include('incloude.navArea')
-    @include('incloude.lastNews')
-    <section id="sliderSection">
-        <div class="row">
+{{--<div class="container">--}}
+{{--    @include('incloude.header')--}}
+{{--    @include('incloude.navArea')--}}
+{{--    @include('incloude.lastNews')--}}
+{{--    <section id="sliderSection">--}}
+{{--        <div class="row">--}}
 
-            @include('incloude.lastPost')
-            @yield('content')
-        </div>
+{{--            @include('incloude.lastPost')--}}
+{{--            @yield('content')--}}
+{{--        </div>--}}
 
-    </section>
-    @include('incloude.footer')
-</div>
-
+{{--    </section>--}}
+{{--    @include('incloude.footer')--}}
+{{--</div>--}}
 
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/js/wow.min.js')}}"></script>

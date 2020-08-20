@@ -28,15 +28,6 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected function redirectToo()
-    {
-        if (auth()->user()->role == 'superAdmin' &&  auth()->user()->status == 'success') {
-            return '/adminPan';
-        }
-
-        return '/';
-    }
-
     /**
      * Create a new controller instance.
      *

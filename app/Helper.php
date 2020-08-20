@@ -14,7 +14,6 @@ class Helper
             $fileName = time() . '.' . $image->getClientOriginalExtension();
 
             Storage::disk('local')->put('image/' . $fileName, 'public');
-            dd($fileName);
             return $fileName;
     }
 }

@@ -27,6 +27,11 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::resource('category', 'CategoryController');
     Route::resource('news', 'NewsController');
     Route::get('/newsCateg/{id}', 'NewsController@categoryNews');
+    Route::resource('user', 'UserController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('news', 'NewsController');
+    Route::get('/search', 'SearchController@search')->name('search');
+
 });
 
 Route::get('/user/verify/{token}', 'UserController@verifyUser');
@@ -35,16 +40,9 @@ Route::get('/user/verify/{token}', 'UserController@verifyUser');
 Auth::routes();
 
 
-//Route::get('/mail', 'UserController@send');
 
-//Route::get('/unsubscribe/{user}', function (Request $request) {
-//    if (!$request->hasValidSignature()) {
-//        abort(401);
-//    }
-//
-//})->name('unsubscribe');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('news', 'NewsController');
-
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

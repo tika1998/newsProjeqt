@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contract\NewsInterface;
-use App\File;
-use App\Helper;
+use App\Http\Requests\NewsRequest;
 use App\News;
 use Illuminate\Http\Request;
 
@@ -25,7 +24,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::all();
+        $news =  News::paginate(9);
         return view('admin.news.allNews', compact('news'));
     }
 
@@ -40,7 +39,6 @@ class NewsController extends Controller
         return $this->newsInterface->categoryNews($id);
     }
 
-
     function create()
     {
         return view('admin.news.create');
@@ -52,16 +50,9 @@ class NewsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        $request['category_id'] = $request->category;
-        $news = News::create($request->all());
-        $file = File::create([
-            'news_id' => $news->id,
-            'name' => Helper::image_upload($request),
-        ]);
-
-        return back();
+        return $this->newsInterface->store($request);
     }
 
     /**
@@ -72,7 +63,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->newsInterface->show($id);
     }
 
     /**
@@ -83,7 +74,7 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->newsInterface->edit($id);
     }
 
     /**
@@ -95,7 +86,10 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->newsInterface->update($request, $id);
+
+        return redirect('/news');
+
     }
 
     /**
@@ -106,6 +100,6 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->newsInterface->delete($id);
     }
 }

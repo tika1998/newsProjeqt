@@ -4,8 +4,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="index.html"  aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span></a></li>
-                      <a href="{{url('user')}}" class="sidebar-link text-dark"><span class="hide-menu"> All Users </span></a>
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{url('/news')}}"  aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span></a></li>
             </ul>
 
             <ul id="sidebarnav">
@@ -24,7 +23,8 @@
 
             <ul id="sidebarnav">
                 <li class="sidebar-item"><a class="sidebar-link sidebar-link text-dark" href="{{route('news.index')}}"  aria-expanded="false"><i class="far fa-newspaper"></i><span class="hide-menu">All News</span></a></li>
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link text-dark" href="{{route('news.create')}}"  aria-expanded="false"><i class="far fa-newspaper"></i><span class="hide-menu">Add News</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link text-dark" href="{{route('news.create')}}"  aria-expanded="false"><i class="fas fa-pen-alt"></i><span class="hide-menu">Add News</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link text-dark" href="{{route('user.index')}}" class="sidebar-link text-dark"><span class="hide-menu"> All Users </span></a></a></li>
 
             </ul>
         </nav>

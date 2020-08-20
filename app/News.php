@@ -16,9 +16,9 @@ class News extends Model
         return $this->belongsTo('App\Category');
     }
 
-    public function news()
+    public function file()
     {
-        return $this->hasMany('App\File')->orderBy('asc');
+        return $this->hasMany('App\File');
     }
 
     public function users() {

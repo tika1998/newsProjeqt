@@ -19,7 +19,6 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->string('short_description');
             $table->text('long_description');
-            $table->string('image');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

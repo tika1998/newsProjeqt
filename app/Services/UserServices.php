@@ -1,31 +1,38 @@
 <?php
 
 namespace App\Services;
+use App\User;
 use Illuminate\Http\Request;
 use App\Contract\UserInterface;
 use App\Http\Requests\AdminCreate;
 use App\Mail\AdminMail;
 use App\Mail\AdminSuccess;
 use App\Mail\VerifyMail;
-use App\User;
 use App\VerifyUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UserServices implements UserInterface
 {
+
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = new User();
+    }
+
     public function index()
     {
         // TODO: Implement index() method.
-        $users = User::all();
-        return $users;
+        return  $this->user::all();
     }
 
     public function changeStatus($id)
     {
         // TODO: Implement changeStatus() method.
 
-        $user = User::find($id);
+        $user = $this->user::find($id);
         $email = $user->email;
         $user->update(['status' => 'success']);
         Mail::to($email)->send(new AdminSuccess());
@@ -33,7 +40,7 @@ class UserServices implements UserInterface
     }
 
     public function blockUSer($id) {
-        $user = User::find($id);
+        $user = $this->user::find($id);
         if ($user->status !== 'block') {
             $user->update(['status' => 'block']);
         } else {
@@ -56,7 +63,7 @@ class UserServices implements UserInterface
         $hashPass = Hash::make($pass);
         $userAdm = $request->all();
         $userAdm['password'] = $hashPass;
-        $user = User::create($userAdm);
+        $user = $this->user::create($userAdm);
 
         $verifyUser = VerifyUser::create([
             'user_id' => $user->id,
@@ -70,6 +77,7 @@ class UserServices implements UserInterface
     public function verifyUser($token)
     {
         $verifyUser = VerifyUser::where('token', $token)->first();
+
         if($verifyUser != null){
             $user = $verifyUser->user;
             if(!$user->verified) {
@@ -77,19 +85,23 @@ class UserServices implements UserInterface
                 $verifyUser->user->save();
                 $text = "duq ancaq verifikacian";
             } else {
+              //  $verifyUser::dropColumn('token');
+//                Schema::table('verify_users', function($table) {
+//                    dd($table);
+//                    $table->dropColumn('token');
+//                });
                 $text = "dzer emaile arden ancel  e verifikcia";
             }
         } else {
             return redirect('/')->with('error', "soooo Sorry");
         }
-
         return redirect('/')->with('message', $text);
     }
 
     public function edit($id)
     {
         // TODO: Implement edit() method.
-        $user = User::find($id);
+        $user = $this->user::find($id);
 
         if ($user) {
             return view('admin.users.updateUser', compact('user'));
@@ -101,7 +113,7 @@ class UserServices implements UserInterface
     public function update(Request $request, $id)
     {
         // TODO: Implement update() method.
-        $user = User::find($id);
+        $user = $this->user::find($id);
         if ($user) {
             $user->update($request->all());
             return redirect('user')->with('message', 'edit successfully');
@@ -113,8 +125,7 @@ class UserServices implements UserInterface
     public function destroy($id)
     {
         // TODO: Implement destroy() method.
-        $user = User::find($id);
-        //dd($user);
+        $user = $this->user::find($id);
         if ($user) {
             $user->delete();
             return redirect('/user');

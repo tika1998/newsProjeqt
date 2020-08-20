@@ -160,10 +160,11 @@
                 <li class="nav-item d-none d-md-block">
                     <a class="nav-link" href="javascript:void(0)">
                         <form>
-                            <div class="customize-input">
+                            <div class="customize-input d-flex">
                                 <input class="form-control custom-shadow custom-radius border-0 bg-white"
-                                       type="search" placeholder="Search" aria-label="Search">
-                                <i class="form-control-icon" data-feather="search"></i>
+                                       type="search" placeholder="Search" aria-label="Search" name="q" id="val">
+                                <button type="button" id="search" class="btn btn-info">search</button>
+
                             </div>
                         </form>
                     </a>
@@ -174,8 +175,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        <img src="{{asset('admin/assets/images/users/profile-pic.jpg')}}" alt="user" class="rounded-circle"
-                             width="40">
+
                         <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                                 class="text-dark">{{Auth::user()->name}}</span> <i data-feather="chevron-down"
                                                                       class="svg-icon"></i></span>
