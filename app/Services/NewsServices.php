@@ -3,13 +3,12 @@
 namespace App\Services;
 
 use App\Contract\NewsInterface;
-use App\File;
-use App\Helper;
 use App\Http\Requests\NewsRequest;
 use App\News;
 use App\NewsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class NewsServices implements NewsInterface {
 
@@ -85,18 +84,28 @@ class NewsServices implements NewsInterface {
     public function store(NewsRequest $request)
     {
         // TODO: Implement store() method.
+        $userId = $request->userId;
+
         $request['category_id'] = $request->category;
-        $news = News::create($request->all());
+        $photo = time() . '.' .request()->avatar->getClientOriginalExtension();
+        Image::make($_FILES['avatar']['tmp_name'])->resize(900, 550)->save(public_path() . '/images/avatar/' . $photo);
+        $news_all = $request->all();
+        $news_all['avatar'] = $photo;
 
-         File::create([
-            'news_id' => $news->id,
-            'name' => Helper::image_upload($request),
-        ]);
+        $news = $this->news->create($news_all);
 
-         NewsUser::create([
-            'user_id' => Auth::id(),
-            'news_id' => $news->id
-        ]);
+//         File::create([
+//            'news_id' => $news->id,
+//            'name' => $photo,
+//        ]);
+
+        if ($userId != null) {
+            array_push($userId, Auth::id());
+            $news->users()->syncWithoutDetaching($userId);
+        } else {
+            $news->users()->syncWithoutDetaching([Auth::id()]);
+        }
+
 
         return back();
     }

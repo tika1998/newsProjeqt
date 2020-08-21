@@ -3,7 +3,7 @@
 namespace App\Contract;
 
 use App\Http\Requests\AdminCreate;
-use Illuminate\Http\Request;
+use App\Http\Requests\EditUserRequest;
 
 interface UserInterface
 {
@@ -23,7 +23,7 @@ interface UserInterface
 
     public function edit($id);
 
-    public function update(Request $request, $id);
+    public function update(EditUserRequest $request, $id);
 
     public function destroy($id);
 

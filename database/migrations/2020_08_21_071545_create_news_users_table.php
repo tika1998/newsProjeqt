@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsUserTable extends Migration
+class CreateNewsUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNewsUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_user', function (Blueprint $table) {
+        Schema::create('news_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('news_id');
@@ -36,6 +36,6 @@ class CreateNewsUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_user');
+        Schema::dropIfExists('news_users');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $fillable = [
-        'category_id', 'title', 'short_description', 'long_description',
+        'category_id','avatar', 'title', 'short_description', 'long_description',
     ];
 
 
@@ -22,6 +22,6 @@ class News extends Model
     }
 
     public function users() {
-        return $this->belongsToMany('App\User', 'news_user');
+        return $this->belongsToMany('App\User', 'news_users');
     }
 }

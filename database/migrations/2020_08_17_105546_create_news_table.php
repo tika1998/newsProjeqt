@@ -18,10 +18,11 @@ class CreateNewsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('short_description');
+            $table->string('avatar');
             $table->text('long_description');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
         });
     }

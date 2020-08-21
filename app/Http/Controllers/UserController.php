@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contract\UserInterface;
 use App\Http\Requests\AdminCreate;
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -86,7 +87,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         return $this->userIterface->update($request, $id);
     }

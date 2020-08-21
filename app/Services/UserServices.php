@@ -2,7 +2,6 @@
 
 namespace App\Services;
 use App\User;
-use Illuminate\Http\Request;
 use App\Contract\UserInterface;
 use App\Http\Requests\AdminCreate;
 use App\Mail\AdminMail;
@@ -11,6 +10,7 @@ use App\Mail\VerifyMail;
 use App\VerifyUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\EditUserRequest;
 
 class UserServices implements UserInterface
 {
@@ -65,7 +65,7 @@ class UserServices implements UserInterface
         $userAdm['password'] = $hashPass;
         $user = $this->user::create($userAdm);
 
-        $verifyUser = VerifyUser::create([
+         VerifyUser::create([
             'user_id' => $user->id,
             'token' => sha1($user->email)
         ]);
@@ -110,10 +110,13 @@ class UserServices implements UserInterface
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         // TODO: Implement update() method.
+
+        $hashPass = Hash::make($request->password);
         $user = $this->user::find($id);
+        $request['password'] = $hashPass;
         if ($user) {
             $user->update($request->all());
             return redirect('user')->with('message', 'edit successfully');

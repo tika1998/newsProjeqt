@@ -9,7 +9,7 @@ ReactDOM.render((
         <div>
             <Example />
             <Switch>
-                <Route exact path='/news' component={NewsList} />
+                <Route exact path='/posts' component={NewsList} />
             </Switch>
         </div>
     </BrowserRouter>

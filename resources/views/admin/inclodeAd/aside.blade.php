@@ -13,7 +13,13 @@
                     <ul aria-expanded="false" class="collapse  first-level base-level-line">
 
                         @foreach($categories as $cat)
-                            <li class="sidebar-item"><a href="{{url('/newsCateg', $cat->id)}}" class="sidebar-link text-dark"><span class="hide-menu"> {{$cat->name}}</span></a> </li>
+                            <li class="sidebar-item d-flex"><a href="{{url('/newsCateg', $cat->id)}}" class="sidebar-link text-dark"><span class="hide-menu"> {{$cat->name}} </span></a>
+                                <form action="{{route('category.destroy',$cat->id)}}" method='post' style='display: contents'>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button style="background: none;border: none;"><i class="far fa-trash-alt" style="color: red"></i></button>
+                                </form>
+                            </li>
                         @endforeach
 
                         <li class="sidebar-item"><a href="{{route('category.create')}}" class="sidebar-link text-dark"><span class="hide-menu">Add Category <i class="fas fa-plus-circle"></i></span></a></li>

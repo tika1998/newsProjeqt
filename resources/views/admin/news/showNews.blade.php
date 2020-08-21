@@ -1,7 +1,7 @@
 @extends('admin.adminLayouts.app')
 @section('contentAd')
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset('images/avatar/'.$news->avatar)}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{$news->title}}</h5>
                     <p class="card-text">{{ $news->short_description }}</p>

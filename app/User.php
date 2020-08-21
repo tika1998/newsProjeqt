@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     public function news() {
-        return $this->belongsToMany('App\News', 'news_user');
+        return $this->belongsToMany('App\News', 'news_users');
     }
 
     public function verifyUser()

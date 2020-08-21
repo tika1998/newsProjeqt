@@ -82,6 +82,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cat = Category::find($id);
+        if ($cat) {
+            $cat->delete();
+            return redirect('/news');
+        } else {
+            return back();
+        }
     }
 }
