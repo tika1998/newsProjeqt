@@ -36,6 +36,10 @@ Route::group(['middleware' => 'is_admin'], function () {
 
 Route::get('/user/verify/{token}', 'UserController@verifyUser');
 
+Route::get('/welcomeAdmin', function () {
+    return view('admin.users.adminPanding');
+})->name('welcomeAdmin');
+
 
 Auth::routes();
 

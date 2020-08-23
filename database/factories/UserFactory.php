@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'role' => 'superAdmin',
         'status' => 'success',
         'email_verified_at' => now(),
-        'password' => 'tika1998', // password
+        'password' => Hash::make('tika1998'), // password
         'remember_token' => Str::random(10),
     ];
 });

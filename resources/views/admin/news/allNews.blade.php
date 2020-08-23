@@ -1,7 +1,7 @@
 @extends('admin.adminLayouts.app')
 @section('contentAd')
 
-<div class="d-flex flex-wrap" id="card">
+<div class="d-flex flex-wrap justify-content-around" id="card">
     @foreach($news as $newsIc)
         <div class="card"  style="width: 18rem;">
             <img class="card-img-top" src="{{asset('images/avatar/'.$newsIc->avatar)}}" alt="Card image cap">
@@ -24,3 +24,14 @@
 {{ $news->links() }}
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+

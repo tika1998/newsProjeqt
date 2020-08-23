@@ -14,14 +14,21 @@ class CheckIsAdmin
      * @param  \Closure  $next
      * @return mixed
      */
+
+
     public function handle($request, Closure $next)
     {
         $admin = Auth::User();
         if($admin==null){
             return redirect()->route('login');
         }
+
+        if($admin->status == 'block') {
+            return redirect()->route('welcomeAdmin')->with('message', 'duq block eeeqqq');
+        }
+
         if(!$admin->isAdmin()) {
-            return redirect()->route('welcome')->with('message', 'mnaceq kapi mej');
+            return redirect()->route('welcomeAdmin')->with('message', 'mnaceq kapi mej');
         }
 
         return $next($request);

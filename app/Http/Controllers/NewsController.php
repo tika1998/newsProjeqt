@@ -26,13 +26,10 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news =  News::all();
-//        $news = News::whereHas('users', function ($query) {
-//            $query->where('user_id', Auth::id());
-//        })->paginate(9);
-        //dd($news);
-        return $news;
-       // return view('admin.news.allNews', compact('news'));
+        $news = News::whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->paginate(9);
+        return view('admin.news.allNews', compact('news'));
     }
 
     /**

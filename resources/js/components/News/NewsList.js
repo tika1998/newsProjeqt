@@ -3,14 +3,14 @@ import React from 'react';
 export class NewsList extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             news: []
         };
     }
 
     componentDidMount() {
-        fetch('/api/news')
+        fetch('/api/newsAp')
             .then(res =>
                 res.json()
             )

@@ -23,14 +23,14 @@ class NewsServices implements NewsInterface {
     {
         // TODO: Implement categoryNews() method.
 
-        $news = $this->news::whereHas('category', function ($query) use ($id) {
-            $query->where('category_id', $id);
-        })->with('category')->get();
+        $news = News::whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->where('category_id', $id)->get();
 
         if (count($news) > 0) {
             return view('admin.category.showNewsCateg', compact('news'));
         } else {
-            return back()->with('message', 'chka norutyun'); //??
+            return back()->with('message', 'chka norutyun');
         }
     }
 
