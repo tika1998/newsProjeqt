@@ -30,6 +30,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::resource('user', 'UserController');
     Route::resource('category', 'CategoryController');
     Route::resource('news', 'NewsController');
+    Route::resource('/adminPan', 'UserController');
+
     Route::get('/search', 'SearchController@search')->name('search');
 
 });

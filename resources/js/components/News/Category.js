@@ -1,9 +1,32 @@
 import React from 'react';
 
 export class Category extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            news: []
+        };
+    }
+
+    componentDidMount() {
+        fetch('/api/category')
+            .then(res =>
+                res.json()
+            )
+            .then((resp) => {
+                this.setState({
+                    news: resp
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
+
     render() {
         return (
-
             <div className="col-lg-8 col-md-8 col-sm-8">
                 <div className="left_content">
                     <div className="single_post_content">

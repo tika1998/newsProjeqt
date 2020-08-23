@@ -60,7 +60,9 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <input type="file" name="avatar" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
 
 
                         <div class="form-group row mb-0">

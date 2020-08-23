@@ -2,7 +2,36 @@ import React from 'react';
 import {  Link } from 'react-router-dom';
 
 export class Nav extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            news: []
+        };
+    }
+
+    componentDidMount() {
+        fetch('/api/category')
+            .then(res =>
+                res.json()
+            )
+            .then((resp) => {
+                console.log(resp)
+                this.setState({
+                    news: resp
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
+
+
     render() {
+        const news1 = this.state.news;
+
         return (
             <section id="navArea">
                 <nav className="navbar navbar-inverse" role="navigation">
@@ -11,22 +40,12 @@ export class Nav extends React.Component {
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav main_nav">
-                            <li className="active"><a href="../index.html"><span className="fa fa-home desktop-home" /><span className="mobile-show">Home</span></a></li>
-                            <li><a href="#">Technology</a></li>
-                            <li className="dropdown"> <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mobile</a>
-                                <ul className="dropdown-menu" role="menu">
-                                    <li><a href="#">Android</a></li>
-                                    <li><a href="#">Samsung</a></li>
-                                    <li><a href="#">Nokia</a></li>
-                                    <li><a href="#">Walton Mobile</a></li>
-                                    <li><a href="#">Sympony</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Tablets</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                        </ul>
+                            {
+                                news1.map(e => (
+                                    <li><Link to={'/news/'+ e.id}>{e.name}</Link></li>
+                                ))
+                            }
+                            </ul>
                     </div>
                 </nav>
             </section>

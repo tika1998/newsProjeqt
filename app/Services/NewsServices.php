@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contract\NewsInterface;
+use App\Helper;
 use App\Http\Requests\NewsRequest;
 use App\News;
 use App\NewsUser;
@@ -87,8 +88,8 @@ class NewsServices implements NewsInterface {
         $userId = $request->userId;
 
         $request['category_id'] = $request->category;
-        $photo = time() . '.' .request()->avatar->getClientOriginalExtension();
-        Image::make($_FILES['avatar']['tmp_name'])->resize(900, 550)->save(public_path() . '/images/avatar/' . $photo);
+
+        $photo = Helper::image_upload($request);
         $news_all = $request->all();
         $news_all['avatar'] = $photo;
 
@@ -103,6 +104,7 @@ class NewsServices implements NewsInterface {
             array_push($userId, Auth::id());
             $news->users()->syncWithoutDetaching($userId);
         } else {
+
             $news->users()->syncWithoutDetaching([Auth::id()]);
         }
 

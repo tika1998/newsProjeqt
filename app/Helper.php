@@ -5,15 +5,15 @@ namespace App;
 
 
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class Helper
 {
     public static function image_upload($request)
     {
-            $image = $request->image;
-            $fileName = time() . '.' . $image->getClientOriginalExtension();
+        $photo = time() . '.' .request()->avatar->getClientOriginalExtension();
+        Image::make($_FILES['avatar']['tmp_name'])->resize(900, 550)->save(public_path() . '/images/avatar/' . $photo);
 
-            Storage::disk('local')->put('image/' . $fileName, 'public');
-            return $fileName;
+        return $photo;
     }
 }

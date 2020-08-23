@@ -21,5 +21,10 @@ class ApiNewsController extends Controller
 
         // return view('admin.news.allNews', compact('news'));
     }
+    public function last()
+    {
+        return News::orderBy('id', 'desc')->take(5)->get();
 
+        // return view('admin.news.allNews', compact('news'));
+    }
 }

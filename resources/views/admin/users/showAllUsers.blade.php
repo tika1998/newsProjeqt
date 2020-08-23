@@ -21,7 +21,7 @@
                     <td style="color: #ffe000">{{$user->status}}</td>
                 @endif
                 <td>{{$user->email}}</td>
-
+                <td><a href="{{route('user.show',$user->id)}}"><i class="fas fa-user-circle"></i></a></td>
                 @if(Auth::user()->role == 'superAdmin' || Auth::user()->id == $user->id)
                     <td>
                         <a href="{{route('user.edit',$user->id )}}"><i class="fas fa-user-edit"  style="color: darkgreen"></i></a>
@@ -46,7 +46,6 @@
                         @endif
                     </td>
                 @endif
-
                 @endforeach
             </tr>
     </table>

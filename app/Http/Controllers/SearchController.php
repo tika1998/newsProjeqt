@@ -10,7 +10,6 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $name = $request->q;
-
         if ($name != '') {
             return News::where('title', 'LIKE', '%' . $name . '%')->get();;
         } else {

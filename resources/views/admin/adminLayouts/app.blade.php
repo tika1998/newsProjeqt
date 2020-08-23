@@ -48,7 +48,6 @@
 
     @include('admin.inclodeAd.aside')
     <div class="page-wrapper">
-
         @yield('contentAd')
         @if(Session::has('message'))
             <p class="alert alert-info">{{ Session::get('message') }}</p>

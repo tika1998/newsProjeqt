@@ -10,6 +10,8 @@ import {LastPost} from "./components/News/LastPost";
 import {Category} from "./components/News/Category";
 import {PopularPost} from "./components/News/PopularPost";
 import {Footer} from "./components/News/Footer";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {ShowCategory} from "./components/News/ShowCategory";
 
 
 export class News extends React.Component {
@@ -18,8 +20,13 @@ export class News extends React.Component {
         return (
             <div>
                 <Header/>
-                <Nav/>
-                <LastNews/>
+
+                <BrowserRouter>
+                    <div>
+                        <Nav/>
+                            <Route exact path='/news/:id' component={ShowCategory} />
+                    </div>
+                </BrowserRouter>
                 <section id="sliderSection">
                     <div className="row">
                         <Slide/>

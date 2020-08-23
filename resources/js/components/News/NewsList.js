@@ -15,7 +15,6 @@ export class NewsList extends React.Component {
                 res.json()
             )
             .then((resp) => {
-                console.log(resp)
                 this.setState({
                     news: resp
                 })

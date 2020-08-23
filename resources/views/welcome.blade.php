@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.fancybox.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 <!--[if lt IE 9]>
     <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>

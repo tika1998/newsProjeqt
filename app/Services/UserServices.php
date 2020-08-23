@@ -98,6 +98,21 @@ class UserServices implements UserInterface
         return redirect('/')->with('message', $text);
     }
 
+
+    public function show($id)
+    {
+        // TODO: Implement show() method.
+
+        $user = $this->user::find($id);
+
+        if ($user) {
+            return view('admin.users.profile', compact('user'));
+        } else {
+            return abort('404');
+        }
+    }
+
+
     public function edit($id)
     {
         // TODO: Implement edit() method.

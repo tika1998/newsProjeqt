@@ -1,10 +1,16 @@
 $(document).ready(() => {
     $('#search').on('click', () => {
         let q = $('#val').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax(
+
             {
                 type: 'get',
-                url: 'http://news.test/search',
+                url: 'http://127.0.0.1:8000/news/search',
                 data: {
                     q: q,
                 },

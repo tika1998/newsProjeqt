@@ -19,7 +19,7 @@ interface UserInterface
 
     public function store(AdminCreate $request);
 
-//    public function show($id);
+    public function show($id);
 
     public function edit($id);
 
