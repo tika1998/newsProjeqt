@@ -25,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Contract\UserInterface', 'App\Services\UserServices');
         $this->app->bind('App\Contract\NewsInterface', 'App\Services\NewsServices');
+        $this->app->bind('App\Contract\CategoryInterface', 'App\Services\CategoryServices');
+
     }
 }

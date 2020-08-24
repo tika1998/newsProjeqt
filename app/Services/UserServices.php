@@ -85,17 +85,14 @@ class UserServices implements UserInterface
                 $verifyUser->user->save();
                 $text = "duq ancaq verifikacian";
             } else {
-              //  $verifyUser::dropColumn('token');
-//                Schema::table('verify_users', function($table) {
-//                    dd($table);
-//                    $table->dropColumn('token');
-//                });
+                $dellToken = VerifyUser::where('user_id', $user->id)->where('token', $token)->first();
+                $dellToken->update();
                 $text = "dzer emaile arden ancel  e verifikcia";
             }
         } else {
             return redirect('/')->with('error', "soooo Sorry");
         }
-        return redirect('/')->with('message', $text);
+        return redirect('/login')->with('message', $text);
     }
 
 

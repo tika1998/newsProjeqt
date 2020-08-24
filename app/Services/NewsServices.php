@@ -6,10 +6,8 @@ use App\Contract\NewsInterface;
 use App\Helper;
 use App\Http\Requests\NewsRequest;
 use App\News;
-use App\NewsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 
 class NewsServices implements NewsInterface {
 

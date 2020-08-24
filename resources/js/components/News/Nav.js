@@ -17,7 +17,6 @@ export class Nav extends React.Component {
                 res.json()
             )
             .then((resp) => {
-                console.log(resp)
                 this.setState({
                     news: resp
                 })
@@ -42,7 +41,7 @@ export class Nav extends React.Component {
                         <ul className="nav navbar-nav main_nav">
                             {
                                 news1.map(e => (
-                                    <li><Link to={'/news/'+ e.id}>{e.name}</Link></li>
+                                    <li key={e.id}><Link to={'/post/'+ e.id}>{e.name}</Link></li>
                                 ))
                             }
                             </ul>

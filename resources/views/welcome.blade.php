@@ -24,7 +24,9 @@
 
 </head>
 <body>
-
+@if(Session::has('message'))
+    <p class="alert alert-info">{{ Session::get('message') }}</p>
+@endif
 
 <div id="preloader">
     <div id="status">&nbsp;</div>

@@ -24,7 +24,7 @@ export class News extends React.Component {
                 <BrowserRouter>
                     <div>
                         <Nav/>
-                            <Route exact path='/news/:id' component={ShowCategory} />
+                            <Route exact path='/post/:id' component={ShowCategory} />
                     </div>
                 </BrowserRouter>
                 <section id="sliderSection">

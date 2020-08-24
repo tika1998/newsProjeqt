@@ -41,7 +41,7 @@ export class LastPost extends React.Component {
 
                             {
                                 post.map(e => (
-                                    <li>
+                                    <li key={e.id}>
                                         <div className="media"> <a href="#" className="media-left">
                                             <img alt="" src={'/images/avatar/'+ `${e.avatar}`} /> </a>
                                             <div className="media-body"> <a href="pages/single_page.html" className="catg_title"> {e.short_description}</a> </div>

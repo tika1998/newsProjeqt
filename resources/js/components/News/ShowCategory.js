@@ -1,64 +1,63 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-export class ShowCategory extends React.Component {
+import React, {useState, useEffect} from 'react';
 
-    constructor(props) {
-        super(props)
-        console.log(props)
-        //console.log(this.props.match.params.id)
-        this.state = {
-            newsCategory: []
-        };
-    }
+export const ShowCategory = props => {
 
-    componentDidMount() {
-        fetch('/api/news/' + this.props.match.params.id)
+    const [news, setNews] = useState([]);
+    const [id, SetId] = useState(false);
+
+
+    useEffect(() => {
+        if (id !== props.match.params.id) {
+            getNews();
+        }
+    });
+
+    const getNews = () => {
+        SetId(props.match.params.id);
+        fetch('/api/news/' + props.match.params.id)
             .then(res =>
+
                 res.json()
             )
-            .then((resp) => {
-                this.setState({
-                    newsCategory: resp
-                })
+            .then((news) => {
+                setNews(news);
+                console.log(news)
+
             })
             .catch(error => {
                 console.log(error)
             })
-
     }
 
-    render() {
-        const newsCateg = this.state.newsCategory;
-        const stDiv = {
-            width: '100%'
-        }
-        return (
-            <div className="col-lg-8 col-md-8 col-sm-8">
-                <div className="left_content">
-                    {
-                        newsCateg.map(e => (
-                            <div className="single_post_content" >
+    const stDiv = {
+        width: '100%'
+    }
 
-                                <h2><span>{e.category.name}</span></h2>
-                                <div className="single_post_content_left" style={stDiv}>
-                                    <ul className="business_catgnav  wow fadeInDown">
-                                        <li>
-                                            <figure className="bsbig_fig">
-                                                <img style={stDiv} alt="" src={'/images/avatar/'+ `${e.avatar}`} /> <span className="overlay" />
-                                                <span className="overlay"/>
-                                                <h3>{e.title}</h3>
-                                                <p>{e.short_description}</p>
-                                                <p>{e.long_description}</p>
-                                            </figure>
-                                        </li>
-                                    </ul>
-                                </div>
+    return (
+        <div className="col-lg-8 col-md-8 col-sm-8">
+            <div className="left_content">
+                {
+                    news.map(e => (
+                        <div className="single_post_content" key={e.id}>
+                            <h2><span>{e.category.name}</span></h2>
+                            <div className="single_post_content_left" style={stDiv}>
+                                <ul className="business_catgnav  wow fadeInDown">
+                                    <li>
+                                        <figure className="bsbig_fig">
+                                            <img style={stDiv} alt="" src={'/images/avatar/' + `${e.avatar}`}/> <span
+                                            className="overlay"/>
+                                            <span className="overlay"/>
+                                            <h3>{e.title}</h3>
+                                            <p>{e.short_description}</p>
+                                            <p>{e.long_description}</p>
+                                        </figure>
+                                    </li>
+                                </ul>
                             </div>
-                        ))
-                    }
-                </div>
+                        </div>
+                    ))
+                }
             </div>
+        </div>
     );
-    }
-    }
-
+}

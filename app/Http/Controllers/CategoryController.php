@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Contract\CategoryInterface;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    private $categoryInterface;
+
+    public function __construct(CategoryInterface $categoryInterface)
+    {
+        $this->categoryInterface = $categoryInterface;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +24,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
     }
 
     /**
@@ -24,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return $this->categoryInterface->create();
     }
 
     /**
@@ -35,9 +45,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-         Category::create($request->all());
-
-         return back()->with('message', 'Created successfully');
+         return $this->categoryInterface->store($request);
     }
 
     /**
@@ -82,12 +90,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $cat = Category::find($id);
-        if ($cat) {
-            $cat->delete();
-            return redirect('/news');
-        } else {
-            return back();
-        }
+       return $this->categoryInterface->delete($id);
     }
 }

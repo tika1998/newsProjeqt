@@ -28,7 +28,9 @@ class AdminCreate extends FormRequest
             'role'     => 'required',
             'status'   => 'required',
             'email'    => 'required',
-            'password' => 'required'
+            'password' => ['required',
+                'min:6',
+                'regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/']
         ];
     }
 }
