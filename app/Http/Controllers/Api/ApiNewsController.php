@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NewsResource;
 use App\News;
+use Illuminate\Support\Facades\Auth;
 
 class ApiNewsController extends Controller
 {
@@ -12,19 +14,30 @@ class ApiNewsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
 
     public function index()
     {
-        return  News::all();
+        $news = News::get();
 
-        // return view('admin.news.allNews', compact('news'));
+        return NewsResource::collection($news);
+
     }
+
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+
     public function last()
     {
-        return News::orderBy('id', 'desc')->take(5)->get();
+        $news = News::orderBy('id', 'desc')->take(5)->get();
+        return NewsResource::collection($news);
+    }
 
-        // return view('admin.news.allNews', compact('news'));
+
+    function news($id) {
+        $news = News::find($id);
+        return new NewsResource($news);
     }
 }

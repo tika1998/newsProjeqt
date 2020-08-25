@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contract\NewsInterface;
+use App\File;
 use App\Helper;
 use App\Http\Requests\NewsRequest;
 use App\News;
@@ -44,7 +45,10 @@ class NewsServices implements NewsInterface {
     {
         // TODO: Implement show() method.
 
-        $news = $this->news::find($id);
+        $news = News::whereHas('file', function ($query) use ($id){
+            $query->where('news_id', $id);
+        })->with('file')->get();
+
 
         if (isset($news)) {
             return view('admin.news.showNews', compact('news'));
@@ -85,24 +89,18 @@ class NewsServices implements NewsInterface {
         // TODO: Implement store() method.
         $userId = $request->userId;
 
-        $request['category_id'] = $request->category;
-
         $photo = Helper::image_upload($request);
         $news_all = $request->all();
         $news_all['avatar'] = $photo;
 
         $news = $this->news->create($news_all);
 
-//         File::create([
-//            'news_id' => $news->id,
-//            'name' => $photo,
-//        ]);
+        Helper::upload_images($request->images,$news->id);
 
         if ($userId != null) {
             array_push($userId, Auth::id());
-            $news->users()->syncWithoutDetaching($userId);
+            $news->users()->syncWithoutDetaching($userId,['role' => 'edit']);
         } else {
-
             $news->users()->syncWithoutDetaching([Auth::id()]);
         }
 

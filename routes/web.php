@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::resource('/adminPan', 'UserController');
 
     Route::get('/search', 'SearchController@search')->name('search');
+    Route::get('/download', 'UserController@exel');
+    Route::get('/export', 'UserController@export');
 
 });
 

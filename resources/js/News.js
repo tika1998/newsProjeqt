@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Link} from 'react-router-dom';
-import {NewsList} from "./components/News/NewsList";
+
 import {Header} from "./components/News/Header";
 import {Nav} from "./components/News/Nav";
-import {LastNews} from "./components/News/LastNews";
 import {Slide} from "./components/News/Slide";
 import {LastPost} from "./components/News/LastPost";
 import {Category} from "./components/News/Category";
@@ -12,7 +9,7 @@ import {PopularPost} from "./components/News/PopularPost";
 import {Footer} from "./components/News/Footer";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {ShowCategory} from "./components/News/ShowCategory";
-
+import {AllNewsFan} from "./components/News/AllNewsFanc";
 
 export class News extends React.Component {
 
@@ -33,9 +30,14 @@ export class News extends React.Component {
                         <LastPost/>
                     </div>
                 </section>
-                <Category/>
 
                 <PopularPost/>
+                <BrowserRouter>
+                    <div>
+                        <Category/>
+                        <Route exact path='/news/:id' component={AllNewsFan} />
+                    </div>
+                </BrowserRouter>
 
                 <Footer />
             </div>

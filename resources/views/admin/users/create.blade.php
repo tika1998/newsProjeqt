@@ -18,19 +18,15 @@
                 <input type="text" class="form-control  " name="name" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
-            <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Role</span>
-                </div>
-                <input type="text" class="form-control" name="role" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            </div>
+        <select class="form-control" id="exampleFormControlSelect1" name="role">
+            <option>Admin</option>
+            <option>SuperAdmin</option>
+        </select>
 
-            <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Status</span>
-                </div>
-                <input type="text" class="form-control" name="status" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            </div>
+        <select class="form-control" id="exampleFormControlSelect1" name="status">
+            <option>Panding</option>
+            <option>success</option>
+        </select>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">

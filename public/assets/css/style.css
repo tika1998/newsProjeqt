@@ -4,7 +4,7 @@ Template URI: http://www.wpfreeware.com/newsfeed-ultra-responsive-news-magazine-
 Author: WpFreeware
 Author URI: http://www.wpfreeware.com
 Description: A Pro bootstrap html5 css3 responsive news magazine website template
-Version: 1.0 
+Version: 1.0
 License: GPL
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -126,7 +126,7 @@ img:hover{opacity:0.75}
 #next-button{cursor:pointer; display:none; font-size:20px; left:0; position:absolute; text-align:center; bottom:0; width:100%}
 #contentSection{float:left; display:inline; width:100%; background-color:#fff; padding:0 30px}
 .left_content{float:left; display:inline; width:100%}
-.single_post_content{float:left; display:inline; width:100%; margin-bottom:20px}
+.single_post_content{ width:100%; margin-bottom:20px}
 .single_post_content > h2{background:none repeat scroll 0 0 #151515; color:#fff; font-family:'Oswald',sans-serif; font-size:18px; font-weight:400; margin-bottom:10px; margin-left:0; margin-top:5px; padding:0; position:relative; text-align:center; text-transform:uppercase; margin-bottom:20px}
 .single_post_content > h2 span{padding:4px 10px}
 .single_post_content_left{float:left; display:inline; width:49%}
@@ -136,7 +136,7 @@ img:hover{opacity:0.75}
 .bsbig_fig > a{display:block}
 .bsbig_fig > a img{width:100%}
 .bsbig_fig figcaption{color:#333; font-family:"Oswald",sans-serif; font-size:23px; font-weight:300; margin-top:10px; margin-bottom:10px}
-.single_post_content_right{float:right; display:inline; width:48%}
+.single_post_content_right{ width:25%}
 .right_content{float:left; display:inline; width:100%; min-height:300px}
 .spost_nav{}
 .spost_nav li{float:left; display:block; width:100%; margin-bottom:10px}

@@ -22,3 +22,4 @@ Route::get('/newsAp', 'Api\ApiNewsController@index');
 Route::get('/category', 'Api\ApiCategoryController@index');
 Route::get('/news/{id}','Api\ApiCategoryController@categoryNews');
 Route::get('/post','Api\ApiNewsController@last');
+Route::get('/post/{id}','Api\ApiNewsController@news');

@@ -50,4 +50,9 @@
             </tr>
     </table>
     <a href="{{route('user.create')}}"><i class="fas fa-plus-square" style="font-size: 25px"></i></a>
+    <form action="{{url('/export')}}">
+        <input type="email" placeholder="email" name="emailName">
+        <button>Send</button>
+    </form>
+
 @endsection

@@ -13,7 +13,7 @@
     <form action="{{route('news.store')}}" class="col-10 mt-5" method="post" enctype="multipart/form-data">
         @csrf
 
-        <select class="form-control" id="exampleFormControlSelect1" name="category">
+        <select class="form-control" id="exampleFormControlSelect1" name="category_id">
             @foreach($categories as $cat)
                 <option value="{{$cat->id}}">{{$cat->name}}</option>
             @endforeach
@@ -50,6 +50,10 @@
 
         <div class="form-group">
             <input type="file" name="avatar" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+
+        <div class="form-group">
+            <input type="file" name="images[]" multiple class="form-control-file" id="exampleFormControlFile1">
         </div>
         <button class="btn btn-outline-info">Create</button>
     </form>

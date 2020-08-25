@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use App\Helper;
 use App\User;
 use App\Contract\UserInterface;
 use App\Http\Requests\AdminCreate;
@@ -35,7 +36,7 @@ class UserServices implements UserInterface
         $user = $this->user::find($id);
         $email = $user->email;
         $user->update(['status' => 'success']);
-        Mail::to($email)->send(new AdminSuccess());
+        Helper::email($email, new AdminSuccess());
         return back();
     }
 
@@ -83,10 +84,10 @@ class UserServices implements UserInterface
             if(!$user->verified) {
                 $verifyUser->user->verified = 1;
                 $verifyUser->user->save();
+                $dellToken = VerifyUser::where('user_id', $user->id)->where('token', $token)->first();
+                $dellToken->update(['token' => 'null']);
                 $text = "duq ancaq verifikacian";
             } else {
-                $dellToken = VerifyUser::where('user_id', $user->id)->where('token', $token)->first();
-                $dellToken->update();
                 $text = "dzer emaile arden ancel  e verifikcia";
             }
         } else {

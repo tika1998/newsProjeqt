@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Contract\UserInterface;
+use App\Exports\UsersExport;
+use App\Helper;
 use App\Http\Requests\AdminCreate;
 use App\Http\Requests\EditUserRequest;
+use App\Mail\SendExcelMail;
+use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
     private $userIterface;
 
-    public function __construct(UserInterface $userIterface) {
+    public function __construct(UserInterface $userIterface)
+    {
         $this->userIterface = $userIterface;
     }
 
@@ -26,7 +33,8 @@ class UserController extends Controller
         return view('admin.users.showAllUsers', compact('users'));
     }
 
-    public function changeStatus($id) {
+    public function changeStatus($id)
+    {
         return $this->userIterface->changeStatus($id);
     }
 
@@ -41,13 +49,27 @@ class UserController extends Controller
         return $this->userIterface->create();
     }
 
-    public function blockUser($id) {
+    public function exel()
+    {
+        return Excel::download(new UsersExport, 'users-collection.xlsx');
+    }
+
+
+    public function export(Request $request) {
+
+        Helper::email($request->emailName, new SendExcelMail());
+        return back();
+    }
+
+    public function blockUser($id)
+    {
         return $this->userIterface->blockUSer($id);
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(AdminCreate $request)
@@ -55,13 +77,15 @@ class UserController extends Controller
         return $this->userIterface->store($request);
     }
 
-    public function verifyUser($token) {
+    public function verifyUser($token)
+    {
         return $this->userIterface->verifyUser($token);
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,7 +96,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,8 +107,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(EditUserRequest $request, $id)
@@ -95,7 +119,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

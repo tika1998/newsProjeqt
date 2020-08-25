@@ -17,10 +17,9 @@ export class LastPost extends React.Component {
             .then(res =>
                 res.json()
             )
-            .then((resp) => {
-                console.log(resp)
+            .then(({data}) => {
                 this.setState({
-                    post: resp
+                    post:data
                 })
             })
             .catch(error => {

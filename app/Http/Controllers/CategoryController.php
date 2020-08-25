@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Contract\CategoryInterface;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category = Category::all();
 
+        return view('admin.category.allCategory', compact('category'));
     }
 
     /**
@@ -67,7 +70,14 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        session(['val' => $id]);
+        $cate = Category::find($id);
+
+        if ($cate) {
+            return view('admin.category.allCategory', compact('cate'));
+        } else {
+            return abort('404');
+        }
     }
 
     /**
@@ -79,7 +89,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        if ($category) {
+            $category->update($request->all());
+            session()->forget('val');
+            return back();
+
+        } else {
+            return abort('404');
+        }
+
     }
 
     /**

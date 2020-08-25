@@ -27,6 +27,9 @@ class NewsRequest extends FormRequest
             'title' => 'required',
             'short_description' => 'required',
             'long_description' => 'required',
+            'avatar' => 'required|mimes:jpeg,jpg,png',
+            'images' => 'required|array',
+            'images.*' => 'mimes:jpeg,jpg,png'
         ];
     }
 }

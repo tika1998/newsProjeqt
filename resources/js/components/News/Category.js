@@ -1,4 +1,5 @@
 import React from 'react';
+import {  Link } from 'react-router-dom';
 
 export class Category extends React.Component {
 
@@ -10,59 +11,56 @@ export class Category extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/category')
+        fetch('/api/newsAp')
             .then(res =>
                 res.json()
             )
             .then((resp) => {
                 this.setState({
-                    news: resp
+                    news: resp.data
                 })
             })
             .catch(error => {
                 console.log(error)
             })
-
     }
 
     render() {
+        const stDiv = {
+            width: '100%'
+        }
+
+        const li = {
+            marginLeft: '17px',
+            width: '30%'
+        }
+        const ul = {
+            display:'flex',
+            flexWrap: 'wrap',
+        }
+
+        const news = this.state.news;
         return (
             <div className="col-lg-8 col-md-8 col-sm-8">
                 <div className="left_content">
                     <div className="single_post_content">
-                        <h2><span>Business</span></h2>
-                        <div className="single_post_content_left">
-                            <ul className="business_catgnav  wow fadeInDown">
-                                <li>
-                                    <figure className="bsbig_fig"> <a href="pages/single_page.html" className="featured_img"> <img alt="" src="images/featured_img1.jpg" /> <span className="overlay" /> </a>
-                                        <figcaption> <a href="pages/single_page.html">Proin rhoncus consequat nisl eu ornare mauris</a> </figcaption>
-                                        <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a phare...</p>
-                                    </figure>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="single_post_content_right">
-                            <ul className="spost_nav">
-                                <li>
-                                    <div className="media wow fadeInDown"> <a href="pages/single_page.html" className="media-left"> <img alt="" src="images/post_img1.jpg" /> </a>
-                                        <div className="media-body"> <a href="pages/single_page.html" className="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="media wow fadeInDown"> <a href="pages/single_page.html" className="media-left"> <img alt="" src="images/post_img2.jpg" /> </a>
-                                        <div className="media-body"> <a href="pages/single_page.html" className="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="media wow fadeInDown"> <a href="pages/single_page.html" className="media-left"> <img alt="" src="images/post_img1.jpg" /> </a>
-                                        <div className="media-body"> <a href="pages/single_page.html" className="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="media wow fadeInDown"> <a href="pages/single_page.html" className="media-left"> <img alt="" src="images/post_img2.jpg" /> </a>
-                                        <div className="media-body"> <a href="pages/single_page.html" className="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
-                                    </div>
-                                </li>
+                        <h2><span>All News</span></h2>
+                        <div className="single_post_content_right" style={stDiv} >
+                            <ul className="spost_nav" style={ul}>
+                                {
+                                    news.map(e => (
+                                        <li style={li}>
+                                            <div className="media wow fadeInDown">
+                                                <img style={stDiv} alt="" src={'/images/avatar/' + `${e.avatar}`}/>
+                                                <h5>{e.title}</h5>
+                                                <p>{e.category}</p>
+                                                <div className="media-body">
+                                                    <Link href="#"  to={'/news/'+ e.id} className="catg_title">{e.short_description}</Link>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
                             </ul>
                         </div>
                     </div>

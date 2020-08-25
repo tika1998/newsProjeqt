@@ -16,13 +16,10 @@ export const ShowCategory = props => {
         SetId(props.match.params.id);
         fetch('/api/news/' + props.match.params.id)
             .then(res =>
-
                 res.json()
             )
             .then((news) => {
-                setNews(news);
-                console.log(news)
-
+                setNews(news.data);
             })
             .catch(error => {
                 console.log(error)
@@ -32,17 +29,14 @@ export const ShowCategory = props => {
     const stDiv = {
         width: '100%'
     }
-
+console.log(news)
     return (
         <div className="col-lg-8 col-md-8 col-sm-8">
             <div className="left_content">
                 {
                     news.map(e => (
                         <div className="single_post_content" key={e.id}>
-                            <h2><span>{e.category.name}</span></h2>
-                            <div className="single_post_content_left" style={stDiv}>
-                                <ul className="business_catgnav  wow fadeInDown">
-                                    <li>
+                            <h2><span>{e.category}</span></h2>
                                         <figure className="bsbig_fig">
                                             <img style={stDiv} alt="" src={'/images/avatar/' + `${e.avatar}`}/> <span
                                             className="overlay"/>
@@ -51,9 +45,6 @@ export const ShowCategory = props => {
                                             <p>{e.short_description}</p>
                                             <p>{e.long_description}</p>
                                         </figure>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     ))
                 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NewsResource;
 use App\News;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +30,8 @@ class ApiCategoryController extends Controller
         // TODO: Implement categoryNews() method.
 
         $news = News::with('category')->where('category_id', $id)->get();
+        return NewsResource::collection($news);
 
-        return $news;
-//        if (count($news) > 0) {
-//            return $news;
-//        } else {
-//            return back()->with('message', 'chka norutyun');
-//        }
     }
 
 }
