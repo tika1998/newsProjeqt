@@ -33,6 +33,8 @@
 @if(Session::has('message'))
   <div class="text">
       <h1>{{ Session::get('message') }}</h1>
+      <span style='font-size:100px;'>&#128527;</span>
+
   </div>
 @endif
 

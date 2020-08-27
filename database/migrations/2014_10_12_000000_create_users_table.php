@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('role')->default('admin');
-            $table->string('status')->default('panding');
+            $table->string('status')->default('Panding');
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();

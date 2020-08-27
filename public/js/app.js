@@ -69936,73 +69936,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
-/*! exports provided: Example */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Example", function() { return Example; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _News_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./News/Header */ "./resources/js/components/News/Header.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var Example = /*#__PURE__*/function (_React$Component) {
-  _inherits(Example, _React$Component);
-
-  var _super = _createSuper(Example);
-
-  function Example() {
-    _classCallCheck(this, Example);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Example, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: '/news'
-      }, "Link"));
-    }
-  }]);
-
-  return Example;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/***/ }),
-
 /***/ "./resources/js/components/News/AllNewsFanc.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/News/AllNewsFanc.js ***!
@@ -70365,6 +70298,14 @@ var Header = /*#__PURE__*/function (_React$Component) {
   _createClass(Header, [{
     key: "render",
     value: function render() {
+      var link = {
+        color: 'white'
+      };
+      var header = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         id: "header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70372,15 +70313,14 @@ var Header = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-lg-12 col-md-12 col-sm-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header_top"
+        className: "header_top",
+        style: header
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header_top_left"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        exact: true,
-        path: "/"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_top_right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Friday, December 05, 2045")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Friday, December 05, 2045")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/login",
+        style: link
+      }, "Log In")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-lg-12 col-md-12 col-sm-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header_bottom"
@@ -70405,79 +70345,6 @@ var Header = /*#__PURE__*/function (_React$Component) {
 
   return Header;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/***/ }),
-
-/***/ "./resources/js/components/News/LastNews.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/News/LastNews.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// import React from 'react';
-//
-// export class LastNews extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//
-//         this.state = {
-//             news: []
-//         };
-//     }
-//
-//     componentDidMount() {
-//         fetch('/api/newsAp')
-//             .then(res =>
-//                 res.json()
-//             )
-//             .then((resp) => {
-//                 console.log(resp)
-//                 this.setState({
-//                     news: resp
-//                 })
-//             })
-//             .catch(error => {
-//                 console.log(error)
-//             })
-//
-//     }
-//
-//     render() {
-//         const news1 = this.state.news;
-//         const mystyle = {
-//             width: '1729px',
-//             left: '-493.81px'
-//         };
-//         return (
-//             <div>
-//                 <section id='newsSection'>
-//                     <div className="row">
-//                         <div className="col-lg-12 col-md-12">
-//                             <div className="latest_newsarea"><span>Latest</span>
-//                                 <div className="tickercontainer">
-//                                     <div className="mask">
-//                                         <ul id="ticker01" className="news_sticker newsticker" style={mystyle}>
-//                                             {
-//                                                 news1.map(e => (
-//                                                     <li><a href=""><img src="images/news_thumbnail3.jpg" alt=""/>{e.title}</a></li>
-//                                                 ))
-//                                             }
-//                                         </ul>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//
-//                 </section>
-//             </div>
-//
-//         )
-//     }
-// }
-//
 
 /***/ }),
 
@@ -70651,9 +70518,13 @@ var Nav = /*#__PURE__*/function (_React$Component) {
       fetch('/api/category').then(function (res) {
         return res.json();
       }).then(function (resp) {
+        console.log(resp);
+
         _this2.setState({
-          news: resp
+          news: resp.data
         });
+
+        console.log(news);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -71064,36 +70935,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_News_Header_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/News/Header.js */ "./resources/js/components/News/Header.js");
-/* harmony import */ var _components_News_Nav_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/News/Nav.js */ "./resources/js/components/News/Nav.js");
-/* harmony import */ var _components_News_LastNews_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/News/LastNews.js */ "./resources/js/components/News/LastNews.js");
-/* harmony import */ var _components_News_LastNews_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_News_LastNews_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_News_Slide__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/News/Slide */ "./resources/js/components/News/Slide.js");
-/* harmony import */ var _components_News_LastPost__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/News/LastPost */ "./resources/js/components/News/LastPost.js");
-/* harmony import */ var _components_News_Category__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/News/Category */ "./resources/js/components/News/Category.js");
-/* harmony import */ var _components_News_PopularPost__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/News/PopularPost */ "./resources/js/components/News/PopularPost.js");
-/* harmony import */ var _components_News_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/News/Footer */ "./resources/js/components/News/Footer.js");
-/* harmony import */ var _components_News_NewsList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/News/NewsList */ "./resources/js/components/News/NewsList.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Example__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
-/* harmony import */ var _News__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./News */ "./resources/js/News.js");
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var _News__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./News */ "./resources/js/News.js");
 
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "container"
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_News__WEBPACK_IMPORTED_MODULE_13__["News"], null)), document.getElementById('root'));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_News__WEBPACK_IMPORTED_MODULE_2__["News"], null)), document.getElementById('root'));
 
 /***/ }),
 

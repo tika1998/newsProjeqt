@@ -4,21 +4,28 @@ import {NewsList} from "./NewsList";
 import { Home } from "../../indexx";
 
 export class Header extends React.Component {
+
     render() {
+        const link = {
+            color: 'white'
+        }
+
+        const header = {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        }
         return (
             <header id="header">
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <div className="header_top">
-                            <div className="header_top_left">
-                                <BrowserRouter>
-                                        <Switch>
-                                            <Route exact path='/'/>
-                                        </Switch>
-                                </BrowserRouter>
-                            </div>
+                        <div className="header_top" style={header}>
                             <div className="header_top_right">
                                 <p>Friday, December 05, 2045</p>
+                            </div>
+
+                            <div>
+                                <a href="/login" style={link}>Log In</a>
                             </div>
                         </div>
                     </div>

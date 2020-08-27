@@ -35,6 +35,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::resource('/adminPan', 'UserController');
 
     Route::get('/search', 'SearchController@search')->name('search');
+    Route::get('/searchNot', 'SearchController@index')->name('searchNot');
+
     Route::get('/download', 'UserController@exel');
     Route::get('/export', 'UserController@export');
 

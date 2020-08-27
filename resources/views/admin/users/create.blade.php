@@ -9,6 +9,7 @@
                 </p>
              </div>
           @endif
+
     <form action="{{route('user.store')}}" class="col-8 mt-5" method="post">
         @csrf
             <div class="input-group input-group-sm mb-3">

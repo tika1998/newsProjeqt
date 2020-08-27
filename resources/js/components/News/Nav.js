@@ -17,9 +17,11 @@ export class Nav extends React.Component {
                 res.json()
             )
             .then((resp) => {
+                console.log(resp);
                 this.setState({
-                    news: resp
+                    news: resp.data
                 })
+                console.log(news)
             })
             .catch(error => {
                 console.log(error)

@@ -24,11 +24,11 @@ class CheckIsAdmin
         }
 
         if($admin->status == 'block') {
-            return redirect()->route('welcomeAdmin')->with('message', 'duq block eeeqqq');
+            return redirect()->route('welcomeAdmin')->with('message', 'Your account is blocked');
         }
 
         if(!$admin->isAdmin()) {
-            return redirect()->route('welcomeAdmin')->with('message', 'mnaceq kapi mej');
+            return redirect()->route('welcomeAdmin')->with('message', 'Stay in touch');
         }
 
         return $next($request);

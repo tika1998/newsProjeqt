@@ -25,7 +25,11 @@
             </div>
             <input type="text" class="form-control" name="title" aria-label="Small"  aria-describedby="inputGroup-sizing-sm">
         </div>
-
+        @error('title')
+        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+        @enderror
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">short_description</span>

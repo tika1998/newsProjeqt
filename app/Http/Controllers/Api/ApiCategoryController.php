@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\NewsResource;
 use App\News;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,9 @@ class ApiCategoryController extends Controller
 
     public function index()
     {
-        return  Category::all();
+        $categ = Category::all();
 
-        // return view('admin.news.allNews', compact('news'));
+        return CategoryResource::collection($categ);
     }
 
     public function categoryNews($id)

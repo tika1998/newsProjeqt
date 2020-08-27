@@ -9,14 +9,6 @@ interface UserInterface
 {
     public function index();
 
-    public function changeStatus($id);
-
-    public function create();
-
-    public function blockUSer($id);
-
-    public function verifyUser($token);
-
     public function store(AdminCreate $request);
 
     public function show($id);
@@ -27,5 +19,10 @@ interface UserInterface
 
     public function destroy($id);
 
+    public function blockUSer($id);
+
+    public function changeStatus($id);
+
+    public function verifyUsreCreate($id, $token);
 
 }

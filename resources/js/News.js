@@ -17,7 +17,6 @@ export class News extends React.Component {
         return (
             <div>
                 <Header/>
-
                 <BrowserRouter>
                     <div>
                         <Nav/>

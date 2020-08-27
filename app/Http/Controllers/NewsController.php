@@ -91,6 +91,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->newsInterface->update($request, $id);
 
         return redirect('/news');

@@ -45,9 +45,7 @@ class NewsServices implements NewsInterface {
     {
         // TODO: Implement show() method.
 
-        $news = News::whereHas('file', function ($query) use ($id){
-            $query->where('news_id', $id);
-        })->with('file')->get();
+        $news = News::where('id',$id)->with('file')->get();
 
 
         if (isset($news)) {

@@ -159,11 +159,11 @@
                 <!-- ============================================================== -->
                 <li class="nav-item d-none d-md-block">
                     <a class="nav-link" href="javascript:void(0)">
-                        <form>
+                        <form action="{{route('search')}}">
                             <div class="customize-input d-flex">
                                 <input class="form-control custom-shadow custom-radius border-0 bg-white"
                                        type="search" placeholder="Search" aria-label="Search" name="q" id="val">
-                                <button type="button" id="search" class="btn btn-info" style="border-radius: 50px;">search</button>
+                                <button  id="search" class="btn btn-info" style="border-radius: 50px;">search</button>
 
                             </div>
                         </form>

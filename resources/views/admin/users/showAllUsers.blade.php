@@ -38,7 +38,7 @@
                             </form>
                         @endif
 
-                        @if($user->status == 'panding')
+                        @if($user->status == 'Panding')
                             <form action="" method="get" style='display: contents'>
                                 @csrf
                                 <a href="{{url('/change',$user->id)}}"><i class="fas fa-check"  style="color: greenyellow"></i></a>

@@ -7,6 +7,7 @@ use App\Exports\UsersExport;
 use App\Helper;
 use App\Http\Requests\AdminCreate;
 use App\Http\Requests\EditUserRequest;
+use App\Mail\AdminSuccess;
 use App\Mail\SendExcelMail;
 use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
@@ -35,35 +36,49 @@ class UserController extends Controller
 
     public function changeStatus($id)
     {
-        return $this->userIterface->changeStatus($id);
+        $email = $this->userIterface->changeStatus($id);
+
+        Helper::email($email, new AdminSuccess());
+        return back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function create()
+    public function blockUSer($id)
     {
-        return $this->userIterface->create();
+        $this->userIterface->blockUSer($id);
+        return back();
+    }
+
+    public function verifyUser($token)
+    {
+
+        $verify = Helper::verifyUser($token);
+       if ($verify == 'success') {
+           return redirect('/login')->with('message', 'Your email verification is successful');
+       }
+
+       if ($verify == 'verified') {
+           return redirect('/login')->with('message', 'Your email address has already been verified');
+       }
+
+        if ($verify == null) {
+            return redirect('/')->with('message', 'sorry');
+        }
     }
 
     public function exel()
     {
-        return Excel::download(new UsersExport, 'users-collection.xlsx');
+        return Excel::download(new UsersExport, 'users-list.xlsx');
     }
 
-
-    public function export(Request $request) {
-
+    public function export(Request $request)
+    {
         Helper::email($request->emailName, new SendExcelMail());
         return back();
     }
 
-    public function blockUser($id)
+    public function create()
     {
-        return $this->userIterface->blockUSer($id);
+        return view('admin.users.create');
     }
 
     /**
@@ -74,12 +89,13 @@ class UserController extends Controller
      */
     public function store(AdminCreate $request)
     {
-        return $this->userIterface->store($request);
-    }
+        $user = $this->userIterface->store($request);
+        $token = sha1($user->email);
+        $this->userIterface->verifyUsreCreate($user->id, $token);
+        Mail::to($user->email)->send(new VerifyMail($user, $request->password));
 
-    public function verifyUser($token)
-    {
-        return $this->userIterface->verifyUser($token);
+        return redirect('/user/create')->with('message', 'create successful');
+
     }
 
     /**
@@ -90,7 +106,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return $this->userIterface->show($id);
+        $user = $this->userIterface->show($id);
+        if ($user) {
+            return view('admin.users.profile', compact('user'));
+        } else {
+            return abort('404');
+        }
     }
 
     /**
@@ -124,6 +145,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return $this->userIterface->destroy($id);
+        $delete = $this->userIterface->destroy($id);
+        if ($delete) {
+            return redirect('/user');
+        }
     }
 }
