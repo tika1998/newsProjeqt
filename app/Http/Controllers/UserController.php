@@ -52,16 +52,15 @@ class UserController extends Controller
     {
 
         $verify = Helper::verifyUser($token);
-       if ($verify == 'success') {
-           return redirect('/login')->with('message', 'Your email verification is successful');
-       }
 
-       if ($verify == 'verified') {
-           return redirect('/login')->with('message', 'Your email address has already been verified');
-       }
+        switch ($verify) {
+            case 'success':
+                return redirect('/login')->with('message', 'Your email verification is successful');
+            case 'verified':
+                return redirect('/login')->with('message', 'Your email address has already been verified');
+            case null:
+                return redirect('/')->with('message', 'sorry');
 
-        if ($verify == null) {
-            return redirect('/')->with('message', 'sorry');
         }
     }
 
@@ -134,7 +133,13 @@ class UserController extends Controller
      */
     public function update(EditUserRequest $request, $id)
     {
-        return $this->userIterface->update($request, $id);
+        $user = $this->userIterface->update($request, $id);
+
+        if ($user) {
+            return redirect('user')->with('message', 'edit successfully');
+        } else {
+            return abort(404);
+        }
     }
 
     /**

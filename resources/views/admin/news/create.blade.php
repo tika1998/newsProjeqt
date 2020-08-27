@@ -10,6 +10,13 @@
         </div>
     @endif
 
+    <div class="page-wrapper">
+        @yield('contentAd')
+        @if(Session::has('message'))
+            <p class="alert alert-info">{{ Session::get('message') }}</p>
+        @endif
+    </div>
+
     <form action="{{route('news.store')}}" class="col-10 mt-5" method="post" enctype="multipart/form-data">
         @csrf
 

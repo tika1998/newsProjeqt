@@ -42,7 +42,7 @@ class UserServices implements UserInterface
     {
         // TODO: Implement show() method.
 
-        $user = $this->user::find($id);
+        $user = $this->user::findOrFail($id);
 
         return $user;
     }
@@ -52,7 +52,7 @@ class UserServices implements UserInterface
     {
         // TODO: Implement edit() method.
 
-        $user = $this->user::find($id);
+        $user = $this->user::findOrFail($id);
 
         if ($user) {
             return view('admin.users.updateUser', compact('user'));
@@ -65,15 +65,10 @@ class UserServices implements UserInterface
     {
         // TODO: Implement update() method.
 
-        $hashPass = Hash::make($request->password);
-        $user = $this->user::find($id);
-        $request['password'] = $hashPass;
-        if ($user) {
-            $user->update($request->all());
-            return redirect('user')->with('message', 'edit successfully');
-        } else {
-            return back();
-        }
+        $user = $this->user::findOrFail($id);
+        $user->update($request->all());
+        return $user;
+
     }
 
     public function destroy($id)
@@ -106,7 +101,8 @@ class UserServices implements UserInterface
         return $user->email;
     }
 
-    public function verifyUsreCreate($id, $token) {
+    public function verifyUsreCreate($id, $token)
+    {
         VerifyUser::create([
             'user_id' => $id,
             'token' => $token

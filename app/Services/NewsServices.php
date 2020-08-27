@@ -10,7 +10,8 @@ use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class NewsServices implements NewsInterface {
+class NewsServices implements NewsInterface
+{
 
     private $news;
 
@@ -19,20 +20,6 @@ class NewsServices implements NewsInterface {
         $this->news = new News();
     }
 
-    public function categoryNews($id)
-    {
-        // TODO: Implement categoryNews() method.
-
-        $news = News::whereHas('users', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->where('category_id', $id)->get();
-
-        if (count($news) > 0) {
-            return view('admin.category.showNewsCateg', compact('news'));
-        } else {
-            return back()->with('message', 'chka norutyun');
-        }
-    }
 
     public function index()
     {
@@ -45,14 +32,7 @@ class NewsServices implements NewsInterface {
     {
         // TODO: Implement show() method.
 
-        $news = News::where('id',$id)->with('file')->get();
-
-
-        if (isset($news)) {
-            return view('admin.news.showNews', compact('news'));
-        } else {
-            return back();
-        }
+        return News::where('id', $id)->with('file')->get();
 
     }
 
@@ -60,13 +40,9 @@ class NewsServices implements NewsInterface {
     {
         // TODO: Implement edit() method.
 
-        $news = $this->news::find($id);
+        return $this->news::find($id);
 
-        if (isset($news)) {
-            return view('admin.news.update', compact('news'));
-        } else {
-            return back();
-        }
+
     }
 
     public function update(Request $request, $id)
@@ -74,11 +50,9 @@ class NewsServices implements NewsInterface {
         // TODO: Implement update() method.
 
         $news = $this->news::find($id);
-        if ($news) {
-            $news->update($request->all());
-        } else {
-            return back();
-        }
+
+        return $news->update($request->all());
+
 
     }
 
@@ -93,17 +67,28 @@ class NewsServices implements NewsInterface {
 
         $news = $this->news->create($news_all);
 
-        Helper::upload_images($request->images,$news->id);
+        Helper::upload_images($request->images, $news->id);
 
         if ($userId != null) {
             array_push($userId, Auth::id());
-            $news->users()->syncWithoutDetaching($userId,['role' => 'edit']);
+            $news->users()->syncWithoutDetaching($userId);
         } else {
             $news->users()->syncWithoutDetaching([Auth::id()]);
         }
 
 
-        return back();
+        return $news;
+    }
+
+    public function categoryNews($id)
+    {
+        // TODO: Implement categoryNews() method.
+
+        $news = News::whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->where('category_id', $id)->get();
+
+        return $news;
     }
 
     public function delete($id)
@@ -112,10 +97,9 @@ class NewsServices implements NewsInterface {
 
         $news = $this->news::find($id);
         if ($news) {
-            $news->delete();
-            return redirect('/news');
+            return $news->delete();
         } else {
-            return back();
+            return false;
         }
     }
 }

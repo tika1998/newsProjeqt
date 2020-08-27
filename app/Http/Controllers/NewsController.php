@@ -40,7 +40,12 @@ class NewsController extends Controller
 
     public function categoryNews($id)
     {
-        return $this->newsInterface->categoryNews($id);
+       $news = $this->newsInterface->categoryNews($id);
+        if (count($news) > 0) {
+            return view('admin.category.showNewsCateg', compact('news'));
+        } else {
+            return back()->with('message', 'chka norutyun');
+        }
     }
 
     function create()
@@ -57,7 +62,11 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        return $this->newsInterface->store($request);
+        $news = $this->newsInterface->store($request);
+
+        if ($news) {
+            return redirect('/news/create')->with('message', 'Create success');
+        }
     }
 
     /**
@@ -68,7 +77,13 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        return $this->newsInterface->show($id);
+        $news = $this->newsInterface->show($id);
+
+        if (isset($news)) {
+            return view('admin.news.showNews', compact('news'));
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -79,7 +94,12 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        return $this->newsInterface->edit($id);
+        $news = $this->newsInterface->edit($id);
+        if (isset($news)) {
+            return view('admin.news.update', compact('news'));
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -92,9 +112,13 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->newsInterface->update($request, $id);
+       $news = $this->newsInterface->update($request, $id);
 
-        return redirect('/news');
+       if ($news) {
+           return redirect('/news')->with('message', 'Update success');
+       } else {
+           return redirect('/news')->with('error', 'Update error');
+       }
 
     }
 
@@ -106,6 +130,12 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        return $this->newsInterface->delete($id);
+        $news = $this->newsInterface->delete($id);
+
+        if ($news) {
+            return redirect('/news');
+        } else {
+            return back();
+        }
     }
 }
