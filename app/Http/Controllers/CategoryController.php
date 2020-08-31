@@ -25,9 +25,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
+        $category = $this->categoryInterface->index();
 
-        return view('admin.category.allCategory', compact('category'));
+        if ($category) {
+            return view('admin.category.allCategory', compact('category'));
+        }
     }
 
     /**
@@ -37,7 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return $this->categoryInterface->create();
+        return view('admin.category.create');
     }
 
     /**
@@ -48,7 +50,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-         return $this->categoryInterface->store($request);
+         $category = $this->categoryInterface->store($request);
+
+         if ($category) {
+             return back()->with('message', 'Created successfully');
+         }
     }
 
     /**
@@ -89,14 +95,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if ($category) {
-            $category->update($request->all());
-            session()->forget('val');
-            return back();
+        $category = $this->categoryInterface->update($request,$id);
 
-        } else {
-            return abort('404');
+        if ($category) {
+            return back();
         }
 
     }
@@ -109,6 +111,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-       return $this->categoryInterface->delete($id);
+       $category = $this->categoryInterface->delete($id);
+
+       if ($category) {
+           return redirect('/category');
+       }
     }
 }
+

@@ -6,7 +6,8 @@ use App\Category;
 use App\Contract\CategoryInterface;
 use Illuminate\Http\Request;
 
-class CategoryServices implements CategoryInterface {
+class CategoryServices implements CategoryInterface
+{
 
     private $category;
 
@@ -15,29 +16,36 @@ class CategoryServices implements CategoryInterface {
         $this->category = new Category();
     }
 
-    public function create()
+    public function index()
     {
-        // TODO: Implement create() method.
-        return view('admin.category.create');
+        return Category::all();
     }
 
     public function store(Request $request)
     {
         // TODO: Implement store() method.
-        Category::create($request->all());
+        return Category::create($request->all());
+    }
 
-        return back()->with('message', 'Created successfully');
+    public function update(Request $request, $id)
+    {
+        // TODO: Implement update() method.
+
+        $category = Category::findOrFail($id);
+        if ($category) {
+            $category->update($request->all());
+            session()->forget('val');
+            return $category;
+        }
+
     }
 
     public function delete($id)
     {
         // TODO: Implement delete() method.
-        $cat = Category::find($id);
+        $cat = Category::findOrFail($id);
         if ($cat) {
-            $cat->delete();
-            return redirect('/news');
-        } else {
-            return back();
+            return $cat->delete();
         }
     }
 }
